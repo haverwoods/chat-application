@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUser } from "react-icons/fa";
+import { FaPhoneAlt, FaUser, FaUserCircle } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Signup = () => {
@@ -14,27 +14,19 @@ const Signup = () => {
             <input
               type="text"
               className="block w-full py-2 text-sm bg-transparent border-b-2  appearance-none"
-              placeholder="enter your name"
+              placeholder="enter your full-name"
               required
             />
           </div>
 
+
+
           <div className="input-box mt-7 mx-5">
-            <FaUser />
+          <FaUserCircle />
             <input
               type="text"
               className="block w-full py-2 text-sm bg-transparent border-b-2  appearance-none"
-              placeholder="enter your username"
-              required
-            />
-          </div>
-
-          {/* <div className="input-box mt-4 mx-5">
-            <RiLockPasswordFill />
-            <input
-              type="password"
-              className="block w-full py-2 text-sm bg-transparent border-b-2 border-gray-300 appearance-none"
-              placeholder="enter password"
+              placeholder="enter your user-name"
               required
             />
           </div>
@@ -44,10 +36,21 @@ const Signup = () => {
             <input
               type="password"
               className="block w-full py-2 text-sm bg-transparent border-b-2 border-gray-300 appearance-none"
-              placeholder="confirm password"
+              placeholder="enter password"
               required
             />
-          </div> */}
+          </div>
+
+          <div className="input-box mt-7 mx-5">
+          <FaPhoneAlt />
+            <input
+              type="number"
+              className="block w-full py-2 text-sm bg-transparent border-b-2  appearance-none"
+              placeholder="enter your phone-number"
+              required
+            />
+          </div>
+
 
           <div className="mt-6">
             <span className="mx-2 my-[10px]"> Already have an account</span>
