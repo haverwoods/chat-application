@@ -2,37 +2,36 @@ const { connect } = require("getstream");
 const { bcrypt } = require("bcrypt");
 const streamchat = require("stream-chat");
 const crypto = require("crypto");
-const { Message } = require("twilio/lib/twiml/MessagingResponse");
 
-const api_key = process.env.STREAM_API_KEY;
-const api_secret = process.env.STREAM_API_SECRET;
-const app_id = process.env.STREAM_APP_ID;
+// const api_key = process.env.STREAM_API_KEY;
+// const api_secret = process.env.STREAM_API_SECRET;
+// const app_id = process.env.STREAM_APP_ID;
 
-const signup = async (req, res) => {
+exports. signup = async (req, res) => {
   try {
     const { fullname, username, password, phonenumber } = req.body;
-
     const userId = crypto.randomBytes(16).toString("hex");
     const serverclient = connect(api_key, api_secret, app_id);
     const hashedPassword = await bcrypt.hash(password, 10);
     const token = serverclient.createUserToken(userId);
+
 
     res
       .status(200)
       .json({ token, fullname, username, userId, hashedPassword, phonenumber });
   } catch (error) {
     console.log(error);
-
     res.status(500).json({ messgae: error });
   }
 };
-
-const login = async (req, res) => {
+exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
     const serverclient = connect(api_key, api_secret, app_id);
     const client = streamchat.getinstance(api_key, api_secret);
+
+    
 
     const { users } = await client.queryuser({ name: username });
     if (!users.length)
@@ -60,4 +59,10 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+// module.exports = { signup, login };
+
+
+
+
+
+

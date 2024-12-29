@@ -18,7 +18,10 @@
     "express": "^4.19.2",
     "getstream": "^8.4.1",
     "nodemon": "^3.1.4",
-    "stream-chat": "^8.38.0",
-    "twilio": "^5.2.2"
+    "socket.io": "^4.8.1",
+    "stream-chat": "^8.38.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.22.0"
   }
 }
