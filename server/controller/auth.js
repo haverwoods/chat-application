@@ -1,68 +1,75 @@
-const { connect } = require("getstream");
 const { bcrypt } = require("bcrypt");
-const streamchat = require("stream-chat");
-const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const { PrismaClient } = require("@prisma/client")
 
-// const api_key = process.env.STREAM_API_KEY;
-// const api_secret = process.env.STREAM_API_SECRET;
-// const app_id = process.env.STREAM_APP_ID;
+const prisma = new PrismaClient();
+//fuction to handle user signup
+exports.signup = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
-exports. signup = async (req, res) => {
   try {
-    const { fullname, username, password, phonenumber } = req.body;
-    const userId = crypto.randomBytes(16).toString("hex");
-    const serverclient = connect(api_key, api_secret, app_id);
+    const { username, email, password } = req.body;
+
+    // Check if client already exists
+    const existingClient = await prisma.User.findFirst({
+      where: {
+        OR: [{ email }, { username }],
+      },
+    });
+
+    if (existingClient) {
+      return res.status(400).json({ message: "Client already exists" });
+    }
+    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-    const token = serverclient.createUserToken(userId);
 
+    // Create new client
+    const User = await prisma.User.create({
+      data: {
+        username,
+        email,
+        password: hashedPassword,
+      },
+    });
+    // Generate JWT token
+    const token = jwt.sign(
+      {
+        id: User.id,
+        email: User.email,
+        username: User.username,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+    console.log(token);
 
-    res
-      .status(200)
-      .json({ token, fullname, username, userId, hashedPassword, phonenumber });
+    // Send response with token and details of user
+    res.status(201).json({
+      message: "Client registered successfully",
+      token: token,
+      client: {
+        id: User.id,
+        username: User.username,
+        email: User.email,
+      },
+    });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ messgae: error });
+    console.error("Registration error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
+//fuction to handle user login
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const serverclient = connect(api_key, api_secret, app_id);
-    const client = streamchat.getinstance(api_key, api_secret);
-
-    
-
-    const { users } = await client.queryuser({ name: username });
-    if (!users.length)
-      return res.status(400).json({ Message: "user not found" });
-
-    const sucess = await bcrypt.compare(password, users[0].hashedPassword);
-    const token = serverclient.createUserToken(users[0].id);
-
-    if (sucess) {
-      res
-        .status(200)
-        .json({
-          token,
-          fullname: users[0].fullname,
-          username,
-          userId: users[0].id,
-        });
-    } else {
-      res.status(500).json({ message: "incorrect password" });
-    }
+    //login logic to be implemented
   } catch (error) {
     console.log(error);
-
     res.status(500).json({ messgae: error });
   }
 };
-
-// module.exports = { signup, login };
-
-
-
-
-
-
