@@ -1,6 +1,7 @@
-const { bcrypt } = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { PrismaClient } = require("@prisma/client")
+const { PrismaClient } = require("@prisma/client");
+const { body, validationResult } = require("express-validator");
+const  bcrypt  = require("bcrypt");
 
 const prisma = new PrismaClient();
 //fuction to handle user signup
@@ -9,16 +10,18 @@ exports.signup = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
+  
 
   try {
     const { username, email, password } = req.body;
 
+
     // Check if client already exists
-    const existingClient = await prisma.User.findFirst({
+    const existingClient = await prisma.user.findFirst({
       where: {
         OR: [{ email }, { username }],
       },
-    });
+    }); 
 
     if (existingClient) {
       return res.status(400).json({ message: "Client already exists" });
@@ -45,6 +48,7 @@ exports.signup = async (req, res) => {
       { expiresIn: "1h" }
     );
     console.log(token);
+    
 
     // Send response with token and details of user
     res.status(201).json({
