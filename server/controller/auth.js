@@ -15,7 +15,6 @@ exports.signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-
     // Check if client already exists
     const existingClient = await prisma.user.findFirst({
       where: {
@@ -30,7 +29,7 @@ exports.signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new client
-    const User = await prisma.User.create({
+    const User = await prisma.user.create({
       data: {
         username,
         email,
@@ -68,12 +67,61 @@ exports.signup = async (req, res) => {
 
 //fuction to handle user login
 exports.login = async (req, res) => {
-  try {
-    const { username, password } = req.body;
-
-    //login logic to be implemented
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ messgae: error });
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
   }
-};
+ 
+  
+    try {
+      const {  email, password } = req.body;
+  
+  
+      // Check if email exists
+      const Client = await prisma.user.findFirst({
+        where: {
+          // OR: [{ email }, { username }],
+          email: email,
+        },
+      }); 
+  
+      if (!Client) {
+        return res.status(400).json({ message: "Client does not exists" });
+      }
+
+  
+      //compare password
+      const match = await bcrypt.compare(password, Client.password);
+      if (!match) {
+        return res.status(400).json({message: "Invalid password"});
+      }
+
+      // Generate JWT token
+      const token = jwt.sign(
+        {
+          id:Client.id,
+          email: Client.email,
+          username: Client.username,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+      console.log(token);
+      
+  
+      // Send response with token and details of user
+      res.status(201).json({
+        message: "Client logins successfully",
+        token: token,
+        client: {
+          id: Client.id,
+          email: Client.email,
+          username: Client.username,
+        },
+      });
+
+} catch (error) {
+  console.log(error);
+  res.status(500).json({ messgae: error });
+}
+}
