@@ -23,8 +23,8 @@ const Login = () => {
               required
             />
           </div>
-
-          {/* <div className="input-box mt-4 mx-5">
+ 
+          <div className="input-box mt-4 mx-5">
           <RiLockPasswordFill />
             <input
               type="password"
@@ -35,7 +35,7 @@ const Login = () => {
               placeholder="password"
               required
             />
-          </div> */}
+          </div>
 
           <div className="mt-6">
             <span className="mx-2 my-[10px]">create new account</span>

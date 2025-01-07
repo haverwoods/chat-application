@@ -1,8 +1,11 @@
 import React from "react";
+import ChannelList from "../components/channelistcontainer";
 
 const Home = () => {
   return (
-    <div className=" fixed bg-cyan-700 h-5/6 w-screen">
+    <div>
+    <div className=" relative bg-cyan-700 h-5/6 w-screen">
+    <ChannelList className=" h-screen"/>
       {/* <MessageCircle /> */}
       <h1 className="text-3xl font-bold underline text-cyan-500 mt-1 ml-10 mb-9">
         {" "}
@@ -45,6 +48,7 @@ const Home = () => {
       </div>
 
   
+    </div>
     </div>
 
   );
