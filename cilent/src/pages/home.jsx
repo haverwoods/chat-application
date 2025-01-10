@@ -1,5 +1,5 @@
 import React from "react";
-import ChannelList from "../components/channelistcontainer";
+import ChannelList from "../components/channelist";
 
 const Home = () => {
   return (
@@ -33,9 +33,7 @@ const Home = () => {
         >
           <input
             type="text"
-            // value={newMessage}
-            // onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Type your message..."
+                      placeholder="Type your message..."
             className="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <button

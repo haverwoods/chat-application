@@ -1,5 +1,5 @@
 import React from "react";
-// import EllipseImage from "../asset/user 3.jpeg";
+
 
 const ChannelList = () => {
   return (
@@ -10,7 +10,7 @@ const ChannelList = () => {
             <div className="flex items-center pl-4 space-x-2">
               <img
                 src="../asset/user 1.png"
-                // src={EllipseImage}
+                // src={User1}
                 className="w-10 h-10 rounded-full"
               />
               <div className="pl-2 pr-2">
@@ -24,7 +24,7 @@ const ChannelList = () => {
           <div className="flex flex-col pt-5">
             <div className="flex items-center pl-4 space-x-2">
               <img
-                 src="../asset/user 2.jpeg"
+                src="../asset/user 2.jpeg"
                 // src={EllipseImage}
                 className="w-10 h-10 rounded-full"
               />
@@ -54,7 +54,7 @@ const ChannelList = () => {
           <div className="flex flex-col pt-5">
             <div className="flex items-center pl-4 space-x-2">
               <img
-               src="../asset/user 4.jpeg"
+                src="../asset/user 4.jpeg"
                 // src={EllipseImage}
                 className="w-10 h-10 rounded-full"
               />
@@ -84,7 +84,7 @@ const ChannelList = () => {
           <div className="flex flex-col pt-5">
             <div className="flex items-center pl-4 space-x-2">
               <img
-          src="../asset/user 6.jpeg"
+                src="../asset/user 6.jpeg"
                 // src={EllipseImage}
                 className="w-10 h-10 rounded-full"
               />
@@ -95,36 +95,21 @@ const ChannelList = () => {
             </div>
           </div>
         </div>
-        {/* <div className="profile card 7">
+        <div className="profile card 7">
           <div className="flex flex-col pt-5">
             <div className="flex items-center pl-4 space-x-2">
               <img
-              src="../asset/user 7.jpeg"
+                src="../asset/user 7.jpeg"
                 // src={EllipseImage}
                 className="w-10 h-10 rounded-full"
               />
               <div className="pl-2 pr-2">
                 <h1 className="text-lg font-medium">david</h1>
-                <p className="">hey there , can we have a quick call lore</p>
+                <p className="">hey there , can we have a quick call </p>
               </div>
             </div>
           </div>
         </div>
-        <div className="profile card 8">
-          <div className="flex flex-col pt-5">
-            <div className="flex items-center pl-4 space-x-2">
-              <img
-             src="../asset/user 8.jpeg"
-                // src={EllipseImage}
-                className="w-10 h-10 rounded-full"
-              />
-              <div className="pl-2 pr-2">
-                <h1 className="text-lg font-medium">david</h1>
-                <p className="">hey there , can we have a quick call lore</p>
-              </div>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );

@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+  const handleSubmit = async (e) => {
+    console.log("Email:", email);
+    console.log("Password:", password);
+  };
   return (
-<div className="flex justify-center bg-gradient-to-r from-cyan-500 to-blue-500 h-screen">
+    <div className="flex justify-center bg-gradient-to-r from-cyan-500 to-blue-500 h-screen">
       <div className="container bg-slate-400 h-96 w-64 mt-8 mr-10 ml-10 backdrop-blur-sm bg-opacity-50">
-        {/* <form action=""> */}
-        {/* <form onSubmit={handlesubmit}> */}
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1 className="text-2xl mt-2 mx-12">login form</h1>
 
           <div className="input-box mt-7 mx-5">
@@ -16,21 +20,21 @@ const Login = () => {
             <input
               type="text"
               name="username"
-            //   value={formData.username}
-            //   onChange={handleInputChange}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="block w-full py-2 text-sm bg-transparent border-b-2  appearance-none"
-              placeholder="username"
+              placeholder="email"
               required
             />
           </div>
- 
+
           <div className="input-box mt-4 mx-5">
-          <RiLockPasswordFill />
+            <RiLockPasswordFill />
             <input
               type="password"
               name="password"
-            //   value={formData.password}
-            //   onChange={handleInputChange}
+              value={username}
+              onChange={(e) => setPassword(e.target.value)}
               className="block w-full py-2 text-sm bg-transparent border-b-2 border-gray-300 appearance-none"
               placeholder="password"
               required
@@ -55,7 +59,7 @@ const Login = () => {
         {/* </Formik> */}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -4,10 +4,11 @@ import Home from "./pages/home"
 import { StreamChat } from "stream-chat"
 import { Chat } from "stream-chat-react"
 import Cookies from "universal-cookie"
-import Channelistcontainer from "./components/channelistcontainer"
-import Channelcontainer from "./components/channelcontainer"
-import Login from "./pages/login"
-import Signup from "./pages/signup"
+import Channelist from "./components/channelist"
+import Channelcontainer from "./components/chatwindow"
+import Login from "./auth/login"
+import Signup from "./auth/signup"
+import Chatwindow from "./components/chatwindow"
 
  const apikey = 'h5nj4fhbszbg'
  const client = StreamChat.getInstance(apikey);
@@ -29,7 +30,9 @@ import Signup from "./pages/signup"
 
       <Routes>
          {/* <Route path="/" element={<Login/>}/>          */}
-         <Route path="/" element={<Home/>}/>         
+         {/* <Route path="/" element={<Home/>}/>          */}
+         <Route path="/" element={<Chatwindow/>}/>         
+         <Route path="/chatwindow" element={<Chatwindow/>}/>         
          <Route path="/home" element={<Home/>}/>         
          <Route path="/home" element={<Home/>}/>         
          <Route path="/login" element={<Login/>}/>         
